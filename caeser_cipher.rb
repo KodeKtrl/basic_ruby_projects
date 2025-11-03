@@ -21,5 +21,3 @@ def caesar_ciper(word, value = 0)
    result.map! {|c| c.chr}
    result.join
 end
-
-p caesar_ciper("Hello World z!", 5)
