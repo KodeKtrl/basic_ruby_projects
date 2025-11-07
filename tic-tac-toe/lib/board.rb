@@ -25,9 +25,8 @@ class MyBoard # rubocop:disable Style/Documentation
       return 'Computer wins!' if combination.all? { |num| computer.include?(num) }
     end
 
-    return "It's a draw!" if board.none? { |n| n.is_a?(Integer) }
+    return "It's a draw!" unless @arr.any? { |n| n.is_a?(Integer) }
 
-    update_board
     'The game continues!'
   end
 

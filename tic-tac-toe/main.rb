@@ -12,21 +12,36 @@ computer_choices = []
 board = MyBoard.new(options)
 player = Player.new
 
-def computer_choose
+player_symbol = player.pick_symbol
+computer_symbol = player_symbol == 'O' ? 'X' : 'O'
+
+def computer_choose(options)
   loop do
     choice = options.sample
-    break if choice.is_a(integer)
+    return choice if choice.is_a?(Integer)
   end
 end
 
-loop do
-  player.pick_symbol
-  board.create_board
-  player_choice = player.make_choice
-  player_choices.push(player_choice)
-  computer_choice = computer_choose
-  computer_choices.push(computer_choice)
-  board.game_over(combinations, player_choices, computer_choices, board)
+board.create_board
 
-  break if options.none? { |n| n.is_a?(integer) }
+loop do
+  player_choice = player.make_choice(options)
+  player_choices.push(player_choice)
+  puts ''
+  puts "Player chose #{player_choice}"
+  puts ''
+  board.update_board
+  puts ''
+  computer_choice = computer_choose(options)
+  computer_choices.push(computer_choice)
+  options[computer_choice] = computer_symbol
+  puts "Computer chose #{computer_choice}"
+  puts ''
+  board.update_board
+  puts ''
+  result = board.game_over(combinations, player_choices, computer_choices, board)
+
+  puts result
+  break if result != 'The game continues!'
+  break if options.none? { |n| n.is_a?(Integer) }
 end
