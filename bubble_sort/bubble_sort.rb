@@ -14,4 +14,4 @@ def bubble_sort(list)
   list
 end
 
-p bubble_sort([2,5,2,7,9, 1])
+p bubble_sort([2,5,2,7,9,1,])
