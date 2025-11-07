@@ -14,7 +14,7 @@ class MyBoard # rubocop:disable Style/Documentation
 
       if ((index + 1) % 3).zero?
         puts ''
-        puts '___|___|___' unless index == arr.length - 1
+        puts '---|---|---' unless index == arr.length - 1
       end
     end
   end
