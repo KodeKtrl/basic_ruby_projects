@@ -5,7 +5,7 @@ class Computer # rubocop:disable Style/Documentation
     options.sample(4)
   end
 
-  def guess_code(secret_code)
+  def guess_code(secret_code) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     numbers = [1, 2, 3, 4, 5, 6]
     all_codes = numbers.repeated_permutation(4).to_a
     guess = [1, 1, 2, 2]
@@ -14,7 +14,7 @@ class Computer # rubocop:disable Style/Documentation
     12.times do |round|
       result = validator(secret_code, guess)
 
-      return puts "Victory #{guess} is the right answer. You took #{round + 1} guesses" if result[:correct] == 4
+      return puts "Victory #{guess} is the right answer. It took #{round + 1} guesses" if result[:correct] == 4
 
       possible_codes.select! { |code| validator(code, guess) == result }
 

@@ -1,27 +1,25 @@
 # frozen_string_literal: true
 
 class Player # rubocop:disable Style/Documentation
-  def make_code(options)
+  def make_code
     code = []
     puts 'Enter the secret code(1-6)'
-    (0...4).times do
+    4.times do
       puts 'Enter a number between 1-6: '
       num = gets.chomp.to_i
-      num = options[num] if options
       code.push(num)
     end
     code
   end
 
-  def guess_code(code) # rubocop:disable Metrics/MethodLength
+  def guess_code(code) # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
     player_code = []
     validator = { correct: 0, close: 0 }
     puts 'Time to guess! You have 12 guesses'
-    guesses = 0
-    while guesses < 12
+
+    12.times do |round|
       player_code = []
-      validator[:correct] = 0
-      validator[:close] = 0
+      validator = { correct: 0, close: 0 }
       4.times do
         puts 'Guess a number!'
         guess = gets.chomp.to_i
@@ -36,10 +34,11 @@ class Player # rubocop:disable Style/Documentation
           end
         end
       end
-      return "Player wins! The code was #{code}" if validator[:correct] == 4
+      return "The code was #{code.join(' ')}, you took #{round + 1} guesses." if validator[:correct] == 4
 
-      guesses += 1
+      puts "#{player_code} is incorrect. Black pegs: #{validator[:correct]}, White pegs: #{validator[:close]}"
+      puts "#{12 - round} guesses left"
     end
-    puts "Player lost, code was: #{code}"
+    puts "Player lost, code was: #{code.join(' ')}"
   end
 end
